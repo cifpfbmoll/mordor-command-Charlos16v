@@ -1,2 +1,17 @@
-build/
-.gradle/
+# Intellij
+.idea/
+*.iml
+*.iws
+.run/
+
+#VSCODE
+.settings/
+.classpath
+.project
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
