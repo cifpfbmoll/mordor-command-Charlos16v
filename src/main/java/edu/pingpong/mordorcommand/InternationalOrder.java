@@ -10,10 +10,12 @@ public class InternationalOrder implements Order {
         this.weight = weight;
     }
 
+    @Override
     public String getDestination() {
         return this.destination;
     }
 
+    @Override
     public int getWeight() {
         return this.weight;
     }

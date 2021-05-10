@@ -1,6 +1,9 @@
 package edu.pingpong.mordorcommand;
 
 
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * NO PUEDES MODIFICAR EL CODIGO DE LOS CASOS TEST 
@@ -16,17 +19,17 @@ public class OrdersTest {
      * 
      * Crea las clases necesarias que se requieren en los casos test
      * respetando los constructores que se exigen.
-
+     */
     @Test
 	public void test_Mordor() {	
 
-        Order orderInt = new InternationalOrder("Mordor", 100);
-        assertEquals("Mordor", pedidoInt.destino());
+        Order internationalOrder = new InternationalOrder("Mordor", 100);
+        assertEquals("Mordor", internationalOrder.getDestination());
 
-		TratamientoPedido tratamientoKO = new TratamientoPedidoInternacional(
-                                                    (PedidoInternacional) pedidoInt);
-        assertNotNull(tratamientoKO);
-        assertFalse(tratamientoKO.tratar());			
+		OrderTreatment treatmentKO = new InternationalOrderTreatment(
+                                                    (InternationalOrder) internationalOrder);
+        assertNotNull(treatmentKO);
+        assertFalse(treatmentKO.treat());
 	}
     /*
 	@Test
