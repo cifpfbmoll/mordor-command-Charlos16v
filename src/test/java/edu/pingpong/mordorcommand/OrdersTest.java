@@ -31,17 +31,17 @@ public class OrdersTest {
         assertNotNull(treatmentKO);
         assertFalse(treatmentKO.treat());
 	}
-    /*
+
 	@Test
 	public void test_Comarca() {
 
-        Pedido pedidoInt = new PedidoInternacional("Comarca", 100);
-        assertEquals("Comarca", pedidoInt.destino());
+        Order internationalOrder = new InternationalOrder("Comarca", 100);
+        assertEquals("Comarca", internationalOrder.getDestination());
 
-		TratamientoPedido tratamientoOK = new TratamientoPedidoInternacional(
-                                                    (PedidoInternacional) pedidoInt);
-        assertNotNull(tratamientoOK);        
-        assertTrue(tratamientoOK.tratar());
+		OrderTreatment treatmentOK = new InternationalOrderTreatment(
+                                                    (InternationalOrder) internationalOrder);
+        assertNotNull(treatmentOK);
+        assertTrue(treatmentOK.treat());
     }
 
     /**
