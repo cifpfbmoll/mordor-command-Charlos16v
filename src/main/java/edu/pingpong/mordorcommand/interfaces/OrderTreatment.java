@@ -1,4 +1,4 @@
-package edu.pingpong.mordorcommand;
+package edu.pingpong.mordorcommand.interfaces;
 
 public interface OrderTreatment {
 

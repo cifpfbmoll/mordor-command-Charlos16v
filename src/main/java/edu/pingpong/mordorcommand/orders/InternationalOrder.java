@@ -1,4 +1,6 @@
-package edu.pingpong.mordorcommand;
+package edu.pingpong.mordorcommand.orders;
+
+import edu.pingpong.mordorcommand.interfaces.Order;
 
 public class InternationalOrder implements Order {
 

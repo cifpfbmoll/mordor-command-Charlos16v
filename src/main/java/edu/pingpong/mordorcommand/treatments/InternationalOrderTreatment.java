@@ -1,4 +1,7 @@
-package edu.pingpong.mordorcommand;
+package edu.pingpong.mordorcommand.treatments;
+
+import edu.pingpong.mordorcommand.interfaces.OrderTreatment;
+import edu.pingpong.mordorcommand.orders.InternationalOrder;
 
 public class InternationalOrderTreatment implements OrderTreatment {
 
