@@ -1,6 +1,20 @@
 package edu.pingpong.mordorcommand;
 
 
+import edu.pingpong.mordorcommand.interfaces.Order;
+import edu.pingpong.mordorcommand.interfaces.OrderTreatment;
+import edu.pingpong.mordorcommand.orders.DangerousOrder;
+import edu.pingpong.mordorcommand.orders.InternationalOrder;
+import edu.pingpong.mordorcommand.orders.NationalOrder;
+import edu.pingpong.mordorcommand.processors.Office;
+import edu.pingpong.mordorcommand.treatments.DangerousOrderTreatment;
+import edu.pingpong.mordorcommand.treatments.InternationalOrderTreatment;
+import edu.pingpong.mordorcommand.treatments.MultipleOrderTreatment;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Crea una oficina que procesa pedidos.
@@ -43,33 +57,56 @@ public class App {
 
     public static void main(String[] args) {
 
-        /*Office office = new Office();
+        Office office = new Office();
 
-        Order order = new InternationalOrder("Comarca", 10);
-        OrderTreatment internationalOrderTreatment = new InternationalOrderTreatment(
-                                                    (InternationalOrder) order);
-        
-        System.out.println(office.printStatus(office.processes(tratamientoInt), pedido));
+        System.out.println("====== InternationalOrder to Comarca! ======");
+        Order orderToComarca = new InternationalOrder("Comarca", 10);
+        OrderTreatment internationalOrderTreatmentComarca = new InternationalOrderTreatment(
+                                                    (InternationalOrder) orderToComarca);
+        System.out.println(office.printStatus(office.processes(internationalOrderTreatmentComarca), orderToComarca) + '\n');
 
-        pedido = new PedidoInternacional("Mordor", 10);
-        tratamientoInt = new TratamientoPedidoInternacional((PedidoInternacional) pedido);
-        
-        System.out.println(oficina.printarStatus(oficina.procesa(tratamientoInt), pedido));
 
-        pedido = new PedidoPeligrosoOrden("Cima de los vientos", 
+        System.out.println("====== InternationalOrder to Mordor! ======");
+        Order orderToMordor = new InternationalOrder("Mordor", 10);
+        OrderTreatment internationalOrderTreatmentMordor = new InternationalOrderTreatment((InternationalOrder) orderToMordor);
+        System.out.println(office.printStatus(office.processes(internationalOrderTreatmentMordor), orderToMordor) + '\n');
+
+        System.out.println("====== DangerousOrder to Cima de los vientos! ======");
+        Order dangerousOrder = new DangerousOrder("Cima de los vientos",
                                           "No urgarse en las uñas con este puñal");
-        TratamientoPedido peligroso = new TratamientoPedidoPeligroso((PedidoPeligroso) pedido);
+        OrderTreatment dangerousOrderTreatment = new DangerousOrderTreatment((DangerousOrder) dangerousOrder);
         
-        System.out.println(oficina.printarStatus(oficina.procesa(peligroso), pedido));
+        System.out.println(office.printStatus(office.processes(dangerousOrderTreatment), dangerousOrder) + '\n');
 
-        pedido = new PedidoPeligrosoOrden("Monte del destino", 
+
+        System.out.println("====== DangerousOrder to Monte del destino! ======");
+        Order rejetedDangerousOrder  = new DangerousOrder("Monte del destino",
                                           "No ponerselo en el dedo");
-        peligroso = new TratamientoPedidoPeligroso((PedidoPeligroso) pedido);
+        OrderTreatment rejectedDangerousOrderTreatment = new DangerousOrderTreatment((DangerousOrder) rejetedDangerousOrder);
         
-        System.out.println(oficina.printarStatus(oficina.procesa(peligroso), pedido));
-        
-        /**
-         * Los pedidos multiples se completan en el ultimo de los casos test 
-         */
+        System.out.println(office.printStatus(office.processes(rejectedDangerousOrderTreatment), rejetedDangerousOrder) + '\n');
+
+
+        System.out.println("====== MultipleOrder! ======");
+        Set<Order> orders = new HashSet<>();
+        List<String> destinations = Arrays.asList("Gondor", "Minas Tirith", "Rohan");
+        List<Integer> weights = Arrays.asList(10, 10, 10);
+
+        for (int i=0; i<destinations.size(); i++) {
+            orders.add(new NationalOrder(destinations.get(i), weights.get(i)));
+        }
+
+
+        MultipleOrderTreatment multipleOrderTreatment = new MultipleOrderTreatment(orders);
+
+        orders.forEach(order -> {
+            System.out.println(office.printStatus(office.processes(multipleOrderTreatment), order));
+        });
+
+        multipleOrderTreatment.calculatePackageQuantity();
+        System.out.println("\nPACKAGE QUANTITY : " + multipleOrderTreatment.getPackageQuantity());
+        multipleOrderTreatment.calculateTotalWeight();
+        System.out.println("TOTAL WEIGHT : " + multipleOrderTreatment.getTotalWeight());
+
     }
 }
