@@ -1,6 +1,11 @@
-package edu.pingpong.mordorcommand;
+package edu.pingpong.mordorcommand.orders;
 
 
+import edu.pingpong.mordorcommand.interfaces.Order;
+import edu.pingpong.mordorcommand.interfaces.OrderTreatment;
+import edu.pingpong.mordorcommand.orders.InternationalOrder;
+import edu.pingpong.mordorcommand.treatments.DangerousOrderTreatment;
+import edu.pingpong.mordorcommand.treatments.InternationalOrderTreatment;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -21,7 +26,7 @@ public class OrdersTest {
      * respetando los constructores que se exigen.
      */
     @Test
-	public void test_Mordor() {	
+	public void mordorTest() {
 
         Order internationalOrder = new InternationalOrder("Mordor", 100);
         assertEquals("Mordor", internationalOrder.getDestination());
@@ -33,7 +38,7 @@ public class OrdersTest {
 	}
 
 	@Test
-	public void test_Comarca() {
+	public void comarcaTest() {
 
         Order internationalOrder = new InternationalOrder("Comarca", 100);
         assertEquals("Comarca", internationalOrder.getDestination());
@@ -54,30 +59,30 @@ public class OrdersTest {
      * 
      * Crea las clases necesarias que se requieren en los casos test
      * respetando los constructores que se exigen.
-
+     */
     @Test
-    public void test_pedido_peligroso_KO() {
+    public void dangerousOrderTreatmentKO() {
 
-        Pedido pedidoConPeligro = new PedidoPeligrosoOrden("Monte del destino", 
+        Order dangerousOrder = new DangerousOrder("Monte del destino",
                                                            "No ponerselo en el dedo");
-        assertEquals("Monte del destino", pedidoConPeligro.destino());
+        assertEquals("Monte del destino", dangerousOrder.getDestination());
 
-        TratamientoPedido tratamientoKO = new TratamientoPedidoPeligroso(
-                                                    (PedidoPeligroso) pedidoConPeligro);
-        assertNotNull(tratamientoKO);
-        assertFalse(tratamientoKO.tratar());
+        OrderTreatment treatmentKO = new DangerousOrderTreatment(
+                                                    (DangerousOrder) dangerousOrder);
+        assertNotNull(treatmentKO);
+        assertFalse(treatmentKO.treat());
     }
 
     @Test
-    public void test_pedido_peligroso_OK() {
+    public void dangerousOrderTreatmentOK() {
 
-        Pedido pedidoConPeligro = new PedidoPeligrosoOrden("Cima de los vientos", 
+        Order dangerousOrder = new DangerousOrder("Cima de los vientos",
                                                            "No urgarse en las uñas con este puñal");
-        assertEquals("Cima de los vientos", pedidoConPeligro.destino());
+        assertEquals("Cima de los vientos", dangerousOrder.getDestination());
 
-        TratamientoPedido tratamientoOK = new TratamientoPedidoPeligroso(
-                                                    (PedidoPeligroso) pedidoConPeligro);
-        assertTrue(tratamientoOK.tratar());
+        OrderTreatment treatmentOK = new DangerousOrderTreatment(
+                                                    (DangerousOrder) dangerousOrder);
+        assertTrue(treatmentOK.treat());
     }
 
     /**
