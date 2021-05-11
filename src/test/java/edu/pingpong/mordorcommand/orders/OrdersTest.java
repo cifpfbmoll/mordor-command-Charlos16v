@@ -106,16 +106,16 @@ public class OrdersTest {
 
     /**
      * Añade una clase para los pedidos nacionales.
-
+     */
 
     @Test
-    public void test_pedido_nacional_UUDI() {
+    public void NationalOrderTest() {
 
-        PedidoInternacional internacional = new PedidoInternacional("Mordor", 10);
-        assertNotNull(internacional);
-        PedidoNacional nacional = new PedidoNacional("Gondor", 50);
-        assertNotNull(nacional);
-        assertNotEquals(internacional.getId(), nacional.getId());
+        InternationalOrder internationalOrder = new InternationalOrder("Mordor", 10);
+        assertNotNull(internationalOrder);
+        NationalOrder nationalOrder = new NationalOrder("Gondor", 50);
+        assertNotNull(nationalOrder);
+        assertNotEquals(internationalOrder.getId(), nationalOrder.getId());
     }
     
     /**
