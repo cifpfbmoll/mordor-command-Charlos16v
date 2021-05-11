@@ -10,6 +10,8 @@ import edu.pingpong.mordorcommand.treatments.DangerousOrderTreatment;
 import edu.pingpong.mordorcommand.treatments.InternationalOrderTreatment;
 import org.junit.Test;
 
+import java.util.TreeMap;
+
 import static org.junit.Assert.*;
 
 /**
@@ -148,27 +150,27 @@ public class OrdersTest {
      * 
      * Hace uso de un tipo enumerado STATUS con las constantes
      * ACEPTADO y RECHAZADO.
-
+     */
 
     @Test
-    public void test_printar_status() {
+    public void PrintStatusTest() {
 
-        Oficina correos = new Oficina();
-        PedidoInternacional toComarcaWithLove = new PedidoInternacional("Comarca", 100);
-        TratamientoPedido pedidoInt = new TratamientoPedidoInternacional(toComarcaWithLove);
+        Office correos = new Office();
+        InternationalOrder toComarcaWithLove = new InternationalOrder("Comarca", 100);
+        OrderTreatment internationalOrderTreatment = new InternationalOrderTreatment(toComarcaWithLove);
 
-        assertTrue(correos.procesa(pedidoInt));
-        assertEquals("Comarca ACEPTADO", correos.printarStatus(
-                                            correos.procesa(pedidoInt), toComarcaWithLove));
+        assertTrue(correos.processes(internationalOrderTreatment));
+        assertEquals("Comarca ACCEPTED", correos.printStatus(
+                                            correos.processes(internationalOrderTreatment), toComarcaWithLove));
 
-        PedidoPeligroso pedidoConPeligro = new PedidoPeligrosoOrden("Monte del destino", 
+        DangerousOrder dangerousOrder = new DangerousOrder("Monte del destino",
                                                                     "No ponerselo en el dedo");
-        TratamientoPedido tratamientoKO = new TratamientoPedidoPeligroso(pedidoConPeligro);
 
-        assertFalse(correos.procesa(tratamientoKO));
-        assertEquals("Monte del destino RECHAZADO", correos.printarStatus(
-                                                        correos.procesa(tratamientoKO), 
-                                                                        pedidoConPeligro));
+        OrderTreatment treatmentKO = new DangerousOrderTreatment(dangerousOrder);
+
+        assertFalse(correos.processes(treatmentKO));
+        assertEquals("Monte del destino REJECTED", correos.printStatus(
+                                                        correos.processes(treatmentKO), dangerousOrder));
 
     }
 
