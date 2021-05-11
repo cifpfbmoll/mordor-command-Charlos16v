@@ -8,9 +8,10 @@ import edu.pingpong.mordorcommand.orders.InternationalOrder;
 import edu.pingpong.mordorcommand.processors.Office;
 import edu.pingpong.mordorcommand.treatments.DangerousOrderTreatment;
 import edu.pingpong.mordorcommand.treatments.InternationalOrderTreatment;
+import edu.pingpong.mordorcommand.treatments.MultipleOrderTreatment;
 import org.junit.Test;
 
-import java.util.TreeMap;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -186,29 +187,29 @@ public class OrdersTest {
      * 
      * Crea las clases necesarias que se requieren en los casos test
      * respetando los constructores que se exigen.
-
+    */
 
     @Test
-    public void test_tratamiento_pedido_multiple_tratar() {
+    public void MultipleOrderTreatmentTest() {
 
         /**
          * Crea una colección de tres pedidos nacionales, a "Gondor", "Minas Tirith", "Rohan"
          * con un peso de 10 cada uno.
          * 
          * Pasasela a TratamientoPedidosMultiple en su constructor.
+        */
 
-
-        Set<Pedido> pedidos = new HashSet<>();
-        List<String> destinos = Arrays.asList("Gondor", "Minas Tirith", "Rohan");
-        List<Integer> pesos = Arrays.asList(10, 10, 10);
+        Set<Order> orders = new HashSet<>();
+        List<String> destinations = Arrays.asList("Gondor", "Minas Tirith", "Rohan");
+        List<Integer> weights = Arrays.asList(10, 10, 10);
         
-        for (int i=0; i<destinos.size(); i++) {
-            pedidos.add(new PedidoNacional(destinos.get(i), pesos.get(i)));
+        for (int i=0; i<destinations.size(); i++) {
+            orders.add(new NationalOrder(destinations.get(i), weights.get(i)));
         }
-        assertEquals(3, pedidos.size());
+        assertEquals(3, orders.size());
 
-        TratamientoPedidoMultiple pedidosMult = new TratamientoPedidoMultiple(pedidos);
-        assertNotNull(pedidosMult);
+        MultipleOrderTreatment multipleOrderTreatment = new MultipleOrderTreatment(orders);
+        assertNotNull(multipleOrderTreatment);
 
         /**
          * Completa los metodos del pedido multiple.
@@ -222,18 +223,19 @@ public class OrdersTest {
          * @param   void
          * @return  void
          * 
+        */
 
+        multipleOrderTreatment.calculatePackageQuantity();
+        assertEquals(3, multipleOrderTreatment.getPackageQuantity(), 0);
 
-        pedidosMult.calcularTotalBultos();
-        assertEquals(3, pedidosMult.getNumBultos(), 0);
-
-        pedidosMult.calcularPesoTotal();
-        assertEquals(30, pedidosMult.getPesoTotal(), 0);
+        multipleOrderTreatment.calculateTotalWeight();
+        assertEquals(30, multipleOrderTreatment.getTotalWeight(), 0);
 
         /**
          * Trata el pedido multiple.
+        */
 
-        assertTrue(pedidosMult.tratar());
+        assertTrue(multipleOrderTreatment.treat());
 
-    }*/
+    }
 }
