@@ -90,17 +90,18 @@ public class OrdersTest {
      * una identificador Id de tipo String
      * autogenerado haciendo uso de la clase UUID de Java
      * https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html
+    */
 
     @Test
-    public void test_UUID_generator() {
+    public void UUIDGeneratorTest() {
 
-        PedidoInternacional internacional = new PedidoInternacional("Mordor", 10);
-        PedidoPeligrosoOrden peligroso = new PedidoPeligrosoOrden("Cima de los vientos", 
+        InternationalOrder internationalOrder = new InternationalOrder("Mordor", 10);
+        DangerousOrder dangerousOrder = new DangerousOrder("Cima de los vientos",
                                                                   "No urgarse en las uñas con este puñal");
-        assertNotNull(internacional.getId());
-        assertNotNull(peligroso.getId());
+        assertNotNull(internationalOrder.getId());
+        assertNotNull(dangerousOrder.getId());
        
-        assertNotEquals(internacional.getId(), peligroso.getId());
+        assertNotEquals(internationalOrder.getId(), dangerousOrder.getId());
     }
 
     /**

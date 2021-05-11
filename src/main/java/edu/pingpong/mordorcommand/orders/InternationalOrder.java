@@ -2,12 +2,16 @@ package edu.pingpong.mordorcommand.orders;
 
 import edu.pingpong.mordorcommand.interfaces.Order;
 
+import java.util.UUID;
+
 public class InternationalOrder implements Order {
 
+    private String id = null;
     private String destination = null;
     private int weight = 0;
 
     public InternationalOrder(String destination, int weight) {
+        this.id = UUID.randomUUID().toString();
         this.destination = destination;
         this.weight = weight;
     }
@@ -20,5 +24,10 @@ public class InternationalOrder implements Order {
     @Override
     public int getWeight() {
         return this.weight;
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
     }
 }
