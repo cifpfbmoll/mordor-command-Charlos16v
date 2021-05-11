@@ -3,7 +3,9 @@ package edu.pingpong.mordorcommand.orders;
 
 import edu.pingpong.mordorcommand.interfaces.Order;
 import edu.pingpong.mordorcommand.interfaces.OrderTreatment;
+import edu.pingpong.mordorcommand.interfaces.Processor;
 import edu.pingpong.mordorcommand.orders.InternationalOrder;
+import edu.pingpong.mordorcommand.processors.Office;
 import edu.pingpong.mordorcommand.treatments.DangerousOrderTreatment;
 import edu.pingpong.mordorcommand.treatments.InternationalOrderTreatment;
 import org.junit.Test;
@@ -124,20 +126,20 @@ public class OrdersTest {
      * La oficina procesa los pedidos en funcion de si
      * es posible tratarlos o no segun las reglas de cada
      * tipo de pedido
-
+     */
 
     @Test
-    public void test_interface_procesador() {
+    public void ProcessorTest() {
         
-        Procesador correos = new Oficina();
-        TratamientoPedido pedidoInt = new TratamientoPedidoInternacional(
-                                            new PedidoInternacional("Comarca", 100));
-        assertTrue(correos.procesa(pedidoInt));
+        Processor correos = new Office();
+        OrderTreatment internationalOrderTreatment = new InternationalOrderTreatment(
+                                            new InternationalOrder("Comarca", 100));
+        assertTrue(correos.processes(internationalOrderTreatment));
 
-        TratamientoPedido pedidoConPeligro = new TratamientoPedidoPeligroso(
-                                                 new PedidoPeligrosoOrden("Cima de los vientos", 
+        OrderTreatment dangerousOrderTreatment = new DangerousOrderTreatment(
+                                                 new DangerousOrder("Cima de los vientos",
                                                 "No urgarse en las uñas con este puñal"));
-        assertTrue(correos.procesa(pedidoConPeligro));
+        assertTrue(correos.processes(dangerousOrderTreatment));
     }
 
     /**
