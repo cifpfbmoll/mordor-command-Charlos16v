@@ -3,7 +3,6 @@ package edu.pingpong.mordorcommand.treatments;
 import edu.pingpong.mordorcommand.interfaces.Order;
 import edu.pingpong.mordorcommand.interfaces.OrderTreatment;
 
-
 import java.util.Set;
 
 public class MultipleOrderTreatment implements OrderTreatment {
@@ -41,7 +40,7 @@ public class MultipleOrderTreatment implements OrderTreatment {
     public boolean treat() {
         calculatePackageQuantity();
         calculateTotalWeight();
-        return (getPackageQuantity() == getOrders().size() && getTotalWeight() > 0 );
+        return (getPackageQuantity() == getOrders().size() && getTotalWeight() > 0);
     }
 
     // Method encharged of sum all the weight of the orders in the orders set.

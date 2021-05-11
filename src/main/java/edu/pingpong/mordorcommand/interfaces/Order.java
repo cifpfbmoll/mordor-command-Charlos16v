@@ -2,7 +2,9 @@ package edu.pingpong.mordorcommand.interfaces;
 
 public interface Order {
 
-    public String getDestination();
-    public int getWeight();
-    public String getId();
+    String getDestination();
+
+    int getWeight();
+
+    String getId();
 }

@@ -8,7 +8,7 @@ public class DangerousOrder implements InstructedOrder {
 
     private String id = null;
     private String destination = null;
-    private int weight = 0;
+    private final int weight = 0;
     private String instructions = null;
 
     public DangerousOrder(String destination, String instructions) {

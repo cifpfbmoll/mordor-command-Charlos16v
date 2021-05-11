@@ -14,7 +14,7 @@ public class Office implements Processor {
 
     // Using Ternary operator (condition? true result : false result)
     public String printStatus(boolean status, Order order) {
-        return status? order.getDestination() + " " + Status.ACCEPTED.name() :
+        return status ? order.getDestination() + " " + Status.ACCEPTED.name() :
                 order.getDestination() + " " + Status.REJECTED.name();
     }
 }
